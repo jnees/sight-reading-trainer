@@ -1,5 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const PORT = process.env.port || 3000;
+
+const attempts = require("./routes/api/attempts");
 
 const app = express();
 
@@ -7,7 +10,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-const PORT = process.env.port || 3000;
+// db config
+const db = require("./config/keys.js").mongoURI;
+
+// Connect mongoose
+mongoose.connect(db, { useNewUrlParser: true })
+    .then(() => console.log("Connected to database..."))
+    .catch(err => console.log(err));
+
+// Use Routes
+app.use("/api/attempts", attempts);
 
 // Listener
 app.listen(PORT, () =>{
