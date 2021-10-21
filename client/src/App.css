@@ -1,0 +1,126 @@
+/* Keys */
+
+.white {
+    height: 275px;
+    width: 4%;
+    border: 2px black solid;
+    border-radius: 4%;
+    display: block;
+    z-index: 1;
+    position: relative;
+    float: left;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.030),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.040),
+    0 12.5px 10px rgba(0, 0, 0, 0.05),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.070),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.080),
+    0 100px 80px rgba(0, 0, 0, 0.10)
+  ;
+  }
+  
+  .black {
+    z-index: 3;
+    height: 180px;
+    width: 2.8%;
+    top: 0;
+    background-color: black;
+    border-radius: 12%;
+    position: absolute;
+  }
+  
+  /* Keyboard Layout */
+
+  .black[data="D#2"]{
+    top: 0;
+    left: 0%;
+    width: 1.5%
+  }
+
+  .black[data="F#2"]{
+    top: 0;
+    left: 6.2%;
+  }
+
+  .black[data="G#2"]{
+    top: 0;
+    left: 10.6%;
+  }
+
+  .black[data="A#2"]{
+    top: 0;
+    left: 15.1%;
+  }
+
+  .black[data="C#3"]{
+    top: 0;
+    left: 22.3%;
+  }
+  
+  .black[data="D#3"]{
+    left: 26.9%;
+  }
+  
+  .black[data="F#3"]{
+    left: 34.3%;
+  }
+  
+  .black[data="G#3"]{
+    left: 38.7%;
+  }
+  
+  .black[data="A#3"]{
+    left: 43.1%;
+  }
+
+  .black[data="C#4"]{
+    left: 50.2%;
+  }
+
+  .black[data="D#4"]{
+    left: 55%;
+  }
+
+  .black[data="F#4"]{
+    left: 62.1%;
+  }
+
+  .black[data="G#4"]{
+    left: 66.6%;
+  }
+
+  .black[data="A#4"]{
+    left: 71%;
+  }
+
+  .black[data="C#5"]{
+    left: 78.3%;
+  }
+
+  .black[data="D#5"]{
+    left: 82.8%;
+  }
+
+  .black[data="D#5"]{
+    left: 82.8%;
+  }
+
+  .black[data="F#5"]{
+    left: 90.3%;
+  }
+
+  .black[data="G#5"]{
+    left: 94.6%;
+  }
+
+  .black[data="A#5"]{
+    left: 99%;
+    width: 1%;
+  }
+
+  .keyboard {
+    position: relative;
+    min-width: 900px;
+    max-width: 1400px;  
+
+  }
