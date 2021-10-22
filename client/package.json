@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@slnsw/react-sheet-music": "^0.0.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -10,9 +11,13 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "react-sheet-music": "^0.0.1",
     "react-transition-group": "^4.4.2",
+    "react-vexflow": "^0.0.4",
     "reactstrap": "^8.10.0",
+    "underscore": "^1.13.1",
     "uuid": "^8.3.2",
+    "vexflow": "^3.0.9",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
