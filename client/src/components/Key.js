@@ -5,26 +5,48 @@ import PropTypes from 'prop-types';
 
 class Key extends Component {
 
+    state = {
+      color: this.props.color
+    }
+
     // Set incorrect state on mount
     componentDidMount() {
       this.props.getStatus();
     }
 
+    /* Click Handling */
     click = () => {
         console.log(`Piano key press: ${this.props.note} midi: ${this.props.midi}`);
 
+        // Check if correct and set note style
+        const correct = this.props.note === this.props.notes.notes;
+        this.setState({
+          ...this.state,
+          color: correct ? "green" : "red"
+        })
+
+        // Attempt payload
+        const attempt = {
+          userId: this.props.notes.userID,
+          keySig: this.props.notes.keySig,
+          note: this.props.notes.notes,
+          correct: correct
+        }
+
         // Send Attempt
-        this.props.sendAttempt(this.props.note);
+        console.log("sending attempt: ", attempt);
+        this.props.sendAttempt(attempt);
     }
 
     render() {
-      const { status } = this.props.notes
+      
         return(
-          <button class={this.props.color} 
+          <button 
+                  class={this.props.color} 
                   onClick={this.click} 
                   data={this.props.note} 
                   midi={this.props.midi}
-                  style={{ backgroundColor: status === "incorrect" ? 'red': this.props.color}}
+                  style={{ backgroundColor: this.state.color}}
                   >
             &nbsp;
           </button>

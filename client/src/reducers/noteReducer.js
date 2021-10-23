@@ -1,8 +1,9 @@
 import { GET_NOTES, GET_STATUS, SEND_ATTEMPT } from "../actions/types"
 
 const initialState = {
-    notes: 'D3',
-    status: "correct"
+    userID: 1,
+    keySig: "C",
+    notes: 'D3'
 }
 
 export default function(state = initialState, action){
@@ -18,12 +19,6 @@ export default function(state = initialState, action){
             }
 
         case SEND_ATTEMPT:
-
-            // Check note pressed to see if it is the same as the expected note, update state
-            let correct = action.note === state.notes;
-            state.status = correct ? "correct" : "incorrect"
-            console.log(state.status, action.note, state.notes);
-
             return {
                 ...state,
             }

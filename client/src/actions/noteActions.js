@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { GET_NOTES, SEND_ATTEMPT, GET_STATUS} from "./types";
 
 export const getNotes = () => {
@@ -6,12 +7,16 @@ export const getNotes = () => {
     };
 };
 
-export const sendAttempt = (note) => {
-    return {
-        type: SEND_ATTEMPT,
-        note: note
-    };
-}
+export const sendAttempt = (attempt) => dispatch => {
+    axios
+        .post(`api/attempts`, attempt)
+        .then(res => 
+            dispatch({
+                type: SEND_ATTEMPT,
+                payload: attempt
+            })
+        )
+};
 
 export const getStatus = () => {
     return {

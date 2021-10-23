@@ -10,6 +10,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
+// Middleware
+app.all('*', logCall);
+    
+function logCall(req, res, next) {
+  console.log(req.url, req.body);
+  next();
+}
+
 // db config
 const db = require("./config/keys.js").mongoURI;
 
@@ -20,6 +28,8 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 // Use Routes
 app.use("/api/attempts", attempts);
+
+
 
 // Listener
 app.listen(PORT, () =>{
