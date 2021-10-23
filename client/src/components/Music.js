@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 class Music extends Component {
 
+    // Use getNotes() function to 
     componentDidMount() {
         this.props.getNotes();
     }

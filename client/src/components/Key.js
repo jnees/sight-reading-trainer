@@ -1,26 +1,46 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getStatus, sendAttempt } from '../actions/noteActions';
+import PropTypes from 'prop-types';
 
-export default class Key extends Component {
-    state = {
-        labelHidden: true
+class Key extends Component {
+
+    // Set incorrect state on mount
+    componentDidMount() {
+      this.props.getStatus();
     }
 
-    toggle = () => {
+    click = () => {
         console.log(`Piano key press: ${this.props.note} midi: ${this.props.midi}`);
+
+        // Send Attempt
+        this.props.sendAttempt(this.props.note);
     }
 
     render() {
+      const { status } = this.props.notes
         return(
           <button class={this.props.color} 
-                  onClick={this.toggle} 
+                  onClick={this.click} 
                   data={this.props.note} 
                   midi={this.props.midi}
+                  style={{ backgroundColor: status === "incorrect" ? 'red': this.props.color}}
                   >
             &nbsp;
-            <span class="note-label" hidden={this.state.labelHidden}>
-              {this.props.note}
-            </span>
           </button>
         );
       }
 }
+
+// Prop validation
+Key.propTypes = {
+  getStatus: PropTypes.func.isRequired,
+  sendAttempt: PropTypes.func.isRequired,
+  notes: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  notes: state.notes
+});
+
+export default connect(mapStateToProps, { getStatus, sendAttempt })(Key);
