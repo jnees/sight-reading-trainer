@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// Create Schema
+// Attempt: Info created when a user attempts to play a given note.
 const AttemptSchema = new Schema({
     userID: {
         type: String,

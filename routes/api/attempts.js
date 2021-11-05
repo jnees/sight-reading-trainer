@@ -15,18 +15,16 @@ router.get("/:id", (req, res) => {
 
 // @route POST api/attempts
 // @desc Post new Attempt
-// @access Public  TODO: This will be authenticated user only once implemented.
+// @access Public
 router.post("/", (req, res) => {
    
-    // Create new Attempt
     const newAttempt = new Attempt({
         userID: req.body.userID,
         keySig: req.body.keySig,
         note: req.body.note,
         correct: req.body.correct   
-    });
+    })
 
-    // Save to db and send confirmation
     newAttempt.save()
         .then(attempt => res.json(attempt))
         .catch(err => res.json(err));
