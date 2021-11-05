@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const PORT = process.env.port || 3000;
+
 
 const attempts = require("./routes/api/attempts");
+const stats = require("./routes/api/stats")
 
 const app = express();
 
@@ -28,10 +29,12 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 // Use Routes
 app.use("/api/attempts", attempts);
+app.use("/api/stats", stats)
 
 
 
 // Listener
+const PORT = process.env.port || 3000;
 app.listen(PORT, () =>{
     console.log("Server running on port " + PORT);
 })

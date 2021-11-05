@@ -1,23 +1,33 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React, { Component } from 'react';
+import Home from './components/Home.js';
+import Stats from './components/Stats'
 import AppNavbar from './components/AppNavbar';
-import Keyboard from './components/Keyboard';
-import Music from './components/Music.js';
 import { Provider } from 'react-redux';
 import store from "./store";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
 
 class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <div className="App">
+      <Router>
+        <Provider store={store}>
+         <div className="App">
           <AppNavbar />
-          <Music />
-          <Keyboard />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/stats" exact component={Stats} />
+          </Switch>
         </div>
-      </Provider>
+        </Provider>
+      </Router>
     );
   }
 }

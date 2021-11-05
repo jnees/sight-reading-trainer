@@ -10,6 +10,8 @@ import {
   NavLink
 
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { updateStats } from '../actions/noteActions';
 
 export default class AppNavbar extends Component {
     state = {
@@ -32,13 +34,19 @@ export default class AppNavbar extends Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink href="/">Home</NavLink>
+                                    <Link class="nav-link" to="/">
+                                        <NavLink >Home</NavLink>
+                                    </Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href="/stats">Stats</NavLink>
+                                    <Link class="nav-link" to="/stats">
+                                        <NavLink href="/stats">Stats</NavLink>
+                                    </Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href="/logout">Log Out</NavLink>
+                                    <Link class="nav-link" to="/logout">
+                                        <NavLink href="/logout">Log Out</NavLink>
+                                    </Link>
                                 </NavItem>
                             </Nav>
                         </Collapse>

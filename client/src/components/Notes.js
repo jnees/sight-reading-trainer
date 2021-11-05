@@ -1,5 +1,5 @@
 import Vex from 'vexflow';
-import React, {Component, useRef} from 'react';
+import React, {Component} from 'react';
 
 const VF = Vex.Flow;
 
@@ -7,16 +7,14 @@ export default class Notes extends Component {
 
     componentDidMount() {
         const svgContainer = document.createElement('div');
-        const {notes} = this.props;
+        const notes = this.props.notes;
 
         // Separate bass note from treble note.
-
-
-        const bassNote = this.props.notes.slice(-1) <= 3 ? this.props.notes + "/w": "f3/w/r";
-        const trebleNote = this.props.notes.slice(-1) > 3 ? this.props.notes + "/w": "b4/w/r";
+        const bassNote = notes.slice(-1) <= 3 ? notes + "/w": "f3/w/r";
+        const trebleNote = notes.slice(-1) > 3 ? notes + "/w": "b4/w/r";
 
         var vf = new VF.Factory({
-            renderer: {elementId: svgContainer, width: 500, height: 400}
+            renderer: {elementId: svgContainer, width: 500, height: 300}
         });
         var score = vf.EasyScore();
         var system = vf.System();
@@ -35,7 +33,7 @@ export default class Notes extends Component {
         }).addClef('bass').addTimeSignature('4/4');
         system.addConnector();
         vf.draw();
-
+ 
         this.refs.outer.appendChild(svgContainer);
     }
 

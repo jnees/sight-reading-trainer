@@ -23,7 +23,7 @@ router.post("/", (req, res) => {
         userID: req.body.userID,
         keySig: req.body.keySig,
         note: req.body.note,
-        correct: req.body.correct
+        correct: req.body.correct   
     });
 
     // Save to db and send confirmation
@@ -31,7 +31,5 @@ router.post("/", (req, res) => {
         .then(attempt => res.json(attempt))
         .catch(err => res.json(err));
 });
-
-
 
 module.exports = router;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_NOTES, SEND_ATTEMPT, GET_STATUS} from "./types";
+import { GET_NOTES, SEND_ATTEMPT, GET_STATUS, GET_NEXT_NOTE, UPDATE_STATS} from "./types";
 
 export const getNotes = () => {
     return {
@@ -7,13 +7,14 @@ export const getNotes = () => {
     };
 };
 
-export const sendAttempt = (attempt) => dispatch => {
+export const sendAttempt = (attempt, message) => dispatch => {
     axios
         .post(`api/attempts`, attempt)
         .then(res => 
             dispatch({
                 type: SEND_ATTEMPT,
-                payload: attempt
+                payload: attempt,
+                message: message
             })
         )
 };
@@ -23,3 +24,31 @@ export const getStatus = () => {
         type: GET_STATUS
     }
 }
+
+export const getNextNote = (newNote, n_seconds) =>  dispatch => {
+
+    setTimeout(() => {
+        dispatch({
+            type: GET_NEXT_NOTE,
+            newNote: newNote
+        })
+        
+    }, n_seconds * 1000)
+}
+
+export const updateStats = (userID) => dispatch => {
+    axios
+        .get(`api/stats/1`,)
+        .then(res => {
+            console.log(res);
+            dispatch({
+                type: UPDATE_STATS,
+                stats: res
+            })
+        }
+        )
+        .catch(err => {
+            console.log("Error updating stats")
+            console.log(err);
+        })
+};

@@ -1,9 +1,27 @@
-import { GET_NOTES, GET_STATUS, SEND_ATTEMPT } from "../actions/types"
+import { GET_NOTES, GET_STATUS, SEND_ATTEMPT, GET_NEXT_NOTE, UPDATE_STATS } from "../actions/types"
+import { randomNote } from "../noteGenerator"
 
 const initialState = {
-    userID: 1,
+    userID: "1",
     keySig: "C",
-    notes: 'D3'
+    notes: randomNote(),
+    attempted: false,
+    message: "Play this note...",
+    stats: {
+        data: {
+            attempted1: 0,
+            accuracy1: 0,
+            attempted7: 0,
+            accuracy7: 0,
+            attempted30: 0,
+            accuracy30: 0,
+            attempted90: 0,
+            accuracy90: 0,
+            totalAttempts: 0,
+            correctAttempts: 0,
+            totalAccuracy: 0
+            }
+        }
 }
 
 export default function(state = initialState, action){
@@ -21,6 +39,22 @@ export default function(state = initialState, action){
         case SEND_ATTEMPT:
             return {
                 ...state,
+                attempted: true,
+                message: action.message
+            }
+
+        case GET_NEXT_NOTE:
+            return {
+                ...state,
+                notes: action.newNote,
+                attempted: false,
+                message: "Play this note..."
+            }
+
+        case UPDATE_STATS:
+            return {
+                ...state,
+                stats: action.stats
             }
 
         default:
