@@ -38,7 +38,7 @@ export const getNextNote = (newNote, n_seconds) =>  dispatch => {
 
 export const updateStats = (userID) => dispatch => {
     axios
-        .get(`api/stats/1`,)
+        .get(`api/stats/${userID}`,)
         .then(res => {
             console.log(res);
             dispatch({

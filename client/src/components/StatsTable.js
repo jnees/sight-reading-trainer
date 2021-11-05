@@ -5,18 +5,11 @@ import PropTypes from 'prop-types';
 
 class StatsTable extends Component {
 
-    state = {
-        notes: {
-            UserID: "wrong"
-        }
+    componentDidMount(){
+        this.props.updateStats(this.props.notes.userID);
     }
 
-    componentDidRender(){
-        // Refresh State Data
-        updateStats(this.state.notes.userID);
-    };
-
-    render() { 
+    render() {
       return (
         <table class="table">
             
