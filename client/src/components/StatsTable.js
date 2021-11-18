@@ -3,6 +3,16 @@ import { updateStats } from '../actions/noteActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+
+/*-----------------------------------------------------------
+  The StatsTable is responsible for displaying the user's
+  stats. This component is linked to the Redux store, which
+  contains the user's latest statistics and will re-render
+  when the store is updated.
+
+  Updates to the data itself are made through the 
+  UpdateStats() function in NoteReducer.js.
+ ------------------------------------------------------------*/
 class StatsTable extends Component {
 
     componentDidMount(){

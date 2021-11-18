@@ -1,6 +1,18 @@
 import Vex from 'vexflow';
 import React, {Component} from 'react';
 
+
+/*-----------------------------------------------------------
+  The Notes component manages the actual drawing of the
+  note and music staff on the screen. This is an implementation
+  of the EasyScore class in the VexFlow library.
+
+  More info on using VexFlow:
+  https://github.com/0xfe/vexflow/wiki/Using-EasyScore
+
+  This component receives the note to draw as a prop rather
+  than connecting to state directly.
+ ------------------------------------------------------------*/
 const VF = Vex.Flow;
 
 export default class Notes extends Component {

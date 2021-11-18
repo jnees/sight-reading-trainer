@@ -6,6 +6,12 @@ import { getNotes } from '../actions/noteActions';
 import PropTypes from 'prop-types';
 
 
+/*-----------------------------------------------------------
+  The Music component is responsible for rendering new
+  Notes components on the screen. It reacts to state changes
+  to the current notes data saved in the Redux store and
+  rerenders on update.
+ ------------------------------------------------------------*/
 class Music extends Component {
 
     // Use getNotes() function to 

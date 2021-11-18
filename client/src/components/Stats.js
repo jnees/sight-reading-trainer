@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import StatsTable from "./StatsTable";
 import {Container, Button, Form} from "reactstrap";
 
-class Stats extends Component {
 
+/*-----------------------------------------------------------
+  The Stats component is responsible for the layout
+  of the stats page. The information contained in the
+  stats table is part of the StatsTable component.
+ ------------------------------------------------------------*/
+class Stats extends Component {
 
     render() {
       return (

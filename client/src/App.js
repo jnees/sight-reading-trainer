@@ -12,6 +12,18 @@ import {
   Route
 } from "react-router-dom";
 
+
+/*----------------------------------------------------
+  App Component - main driver component for the
+  single page app.
+
+  Router => Determines which components are rendered
+          at each end point.
+
+  Provider => Allows components to be rendered within
+          the context of the Redux state store.
+-----------------------------------------------------*/
+
 class App extends Component {
   
   render() {

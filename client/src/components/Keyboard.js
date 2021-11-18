@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import Key from './Key';
 
+/*-----------------------------------------------------------
+  The Keyboard component is a static list of Key objects
+  with props representing their note name, color, and midi
+  value. These cannot be changed without impacting the layout
+  of the keyboard (see CSS keyboard section)
+
+  The keyboard does not use state or require props as these
+  are handled by the Keys.
+ ------------------------------------------------------------*/
 export default class Keyboard extends Component {
     state = {}
 

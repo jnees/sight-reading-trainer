@@ -4,6 +4,17 @@ import { getStatus, sendAttempt, getNextNote, updateStats } from '../actions/not
 import PropTypes from 'prop-types';
 import { randomNote } from '../noteGenerator';
 
+
+/*-----------------------------------------------------------
+  Each piano key on the keyboard is a Key component. Clicking
+  a Key triggers the sequence of actions needed to make a
+  note attempt, check it, and update the database and the
+  message on the screen.
+
+  The key state is connected to the Redux store. The values
+  of the key's note and midi number are determined by the
+  props passed in by the Keyboard component.
+ ------------------------------------------------------------*/
 class Key extends Component {
 
     state = {

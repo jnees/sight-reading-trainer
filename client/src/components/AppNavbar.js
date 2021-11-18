@@ -11,8 +11,16 @@ import {
 
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { updateStats } from '../actions/noteActions';
 
+
+/*-----------------------------------------------
+    Navigation bar component.
+
+    Allows user to navigate the site pages;
+    Home, Stats, and Logout. Reacts to small
+    screens by converting to pop-out list
+    with pancake toggle button.
+ ------------------------------------------------*/
 export default class AppNavbar extends Component {
     state = {
         isOpen: false
