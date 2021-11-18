@@ -12,7 +12,6 @@ import {
   Route
 } from "react-router-dom";
 
-
 /*----------------------------------------------------
   App Component - main driver component for the
   single page app.
@@ -29,15 +28,15 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Provider store={store}>
-         <div className="App">
-          <AppNavbar />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/stats" exact component={Stats} />
-          </Switch>
-        </div>
-        </Provider>
+          <Provider store={store}>
+            <div className="App">
+              <AppNavbar />
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/stats" exact component={Stats} />
+              </Switch>
+            </div>
+          </Provider>
       </Router>
     );
   }
