@@ -4,7 +4,16 @@ import {
     REGISTER_FAIL
 } from './types';
 
-// Register User
+/*----------------------------------------------------
+    register({name, email, password})
+    Attempt to register a user using the information
+    that they entered in the register form and
+    a POST to the /api/users backend endpoint.
+
+    Returns either a REGISTER_SUCCESS or REGISTER_FAIL
+    action to the authReducer along with a token
+    if successful.
+------------------------------------------------------*/
 export const register = ({ name, email, password }) => async dispatch => {
     const config = {
         headers: {

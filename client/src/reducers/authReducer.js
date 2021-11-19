@@ -3,14 +3,18 @@ import {
     REGISTER_SUCCESS
 } from '../actions/types';
 
+/*---------------------------------------------------
+    Initial Authentication state
+    token: JWT token. Initially checks local storage.
+-----------------------------------------------------*/
 const initialState = {
-    token: localStorage.getItem('token');
+    token: localStorage.getItem('token'),
     isAuthenticated: null,
     loading: true,
     user: null
 }
 
-export default function(state = initialState, action) {
+const authReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
     switch(type){
@@ -36,3 +40,5 @@ export default function(state = initialState, action) {
             return state;
     }
 }
+
+export default authReducer;

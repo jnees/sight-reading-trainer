@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import React, { Fragment } from 'react';
+import React from 'react';
 import Home from './components/Home.js';
 import Stats from './components/Stats';
 import Login from './components/Login';

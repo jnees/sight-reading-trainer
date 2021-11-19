@@ -1,5 +1,7 @@
+import { connect } from 'react-redux';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { register } from '../actions/authActions'
 import { Container,
          FormGroup,
          Form,
@@ -7,12 +9,16 @@ import { Container,
          Input,
          Button
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 /*---------------------------------------------------
     This component is the registration page. Users
     are directed here if they are not authenticated.
+    Submitting this form attempts to create a new
+    user in the database via a POST call to the 
+    "/api/users" endpoint.
 -----------------------------------------------------*/
-export default function Register() {
+const Register = ({register}) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -31,7 +37,7 @@ export default function Register() {
         if(password !== password2){
             console.log("Passwords do not match.")
         } else {
-            console.log('Success');
+            register({ name, email, password });
         }
     }
 
@@ -88,3 +94,9 @@ export default function Register() {
             </Container>
     )
 }
+
+Register.propTypes = {
+    register: PropTypes.func.isRequired
+};
+
+export default connect(null,{ register })(Register);
