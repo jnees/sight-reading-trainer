@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Home from './components/Home.js';
 import Stats from './components/Stats';
 import Login from './components/Login';
@@ -11,9 +11,10 @@ import store from "./store";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect
+  Route
 } from "react-router-dom";
+import { loadUser } from './actions/authActions';
+import setAuthToken from './utils/setAuthToken'
 
 /*----------------------------------------------------
   App Component - main driver component for the
@@ -29,30 +30,37 @@ import {
   the login page.
 -----------------------------------------------------*/
 
-const isAuthenticated = false;
+
+if(localStorage.token){
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
+
+    // Load User ->  Run once only (like componentDidMount)
+    useEffect(() => {
+      store.dispatch(loadUser());
+    }, []);
   
     return (
       <Router>
           <Provider store={store}>
-            {isAuthenticated? <AppNavbar />: null}
-              
+            <AppNavbar />
             <Switch>
               <Route exact path="/">
-                {isAuthenticated ? <Home />: <Redirect to="/login" /> }
+                <Home />
               </Route>
 
               <Route exact path="/stats">
-                {isAuthenticated ? <Stats />: <Redirect to="/login" />}
+                <Stats />
               </Route>
 
               <Route exact path="/login">
-                {isAuthenticated ? <Redirect to="/" />: <Login />}
+                <Login />
               </Route>
 
               <Route exact path="/register">
-                {isAuthenticated ? <Redirect to="/" />: <Register />}
+                <Register />
               </Route>
             </Switch>
 

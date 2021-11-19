@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { register } from '../actions/authActions'
 import { Container,
          FormGroup,
@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
     user in the database via a POST call to the 
     "/api/users" endpoint.
 -----------------------------------------------------*/
-const Register = ({register}) => {
+const Register = ({register, isAuthenticated}) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -39,6 +39,10 @@ const Register = ({register}) => {
         } else {
             register({ name, email, password });
         }
+    }
+
+    if(isAuthenticated){
+        return <Redirect to="/"></Redirect>
     }
 
     return (
@@ -96,7 +100,12 @@ const Register = ({register}) => {
 }
 
 Register.propTypes = {
-    register: PropTypes.func.isRequired
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
 };
 
-export default connect(null,{ register })(Register);
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps,{ register })(Register);

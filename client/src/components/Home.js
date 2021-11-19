@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Keyboard from './Keyboard';
 import Music from './Music.js';
 import AttemptMsg from "./AttemptMsg.js"
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 /*-----------------------------------------------
@@ -11,18 +14,27 @@ import AttemptMsg from "./AttemptMsg.js"
  level components.
 ------------------------------------------------*/
 
-class Home extends Component {
-
-    render() {
-      return (
-          <div>
-            <AttemptMsg />
-            <Music />
-            <Keyboard />
-          </div>
-      );
-    }
+const Home = ( {isAuthenticated} ) => {
+  
+  if(!isAuthenticated){
+    return <Redirect to="/login"></Redirect>
   }
-  
-  export default Home;
-  
+
+  return (
+      <div>
+        <AttemptMsg />
+        <Music />
+        <Keyboard />
+      </div>
+  );
+}
+
+Home.propTypes = {
+    isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, {})(Home);

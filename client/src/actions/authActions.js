@@ -1,8 +1,44 @@
 import axios from 'axios';
 import {
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    USER_LOADED,
+    AUTH_ERROR,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS
 } from './types';
+import setAuthToken from '../utils/setAuthToken'
+
+
+/*----------------------------------------------------
+    loadUser
+
+    This function attempts to load a user from through
+    a GET request to backend "/api/auth". The middleware
+    of that endpoint requires a token in the header.
+------------------------------------------------------*/
+export const loadUser = () => async dispatch => {
+
+    // Set global header if token.
+    if(localStorage.token){
+        setAuthToken(localStorage.token);
+    }
+
+    // Attempt to retreive user info
+    try{
+        const res = await axios.get("/api/auth");
+
+        dispatch({
+            type: USER_LOADED,
+            payload: res.data
+        });
+    } catch(error){
+        dispatch({
+            type: AUTH_ERROR
+        });
+    }
+}
+
 
 /*----------------------------------------------------
     register({name, email, password})
@@ -31,6 +67,7 @@ export const register = ({ name, email, password }) => async dispatch => {
             type: REGISTER_SUCCESS,
             payload: res.data
         });
+        dispatch(loadUser());
     } catch(err) {
         const errors = err.response.data.errors;
 
@@ -39,6 +76,41 @@ export const register = ({ name, email, password }) => async dispatch => {
         }
         dispatch({
             type: REGISTER_FAIL
+        })
+    }
+}
+
+
+/*----------------------------------------------------
+    login
+------------------------------------------------------*/
+export const login = (email, password) => async dispatch => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    const body = JSON.stringify({ email, password });
+
+    // Attempt login. If successful, token will be in payload.
+    try {
+        const res = await axios.post('api/auth', body, config);
+
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload: res.data
+        });
+
+        dispatch(loadUser());
+    } catch(err) {
+        const errors = err.response.data.errors;
+
+        if(errors){
+            errors.forEach(error => console.log(error));
+        }
+        dispatch({
+            type: LOGIN_FAIL
         })
     }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Container,
          FormGroup,
          Form,
@@ -7,13 +8,15 @@ import { Container,
          Input,
          Button
 } from 'reactstrap'
+import PropTypes from 'prop-types';
+import { login } from '../actions/authActions';
 
 /*---------------------------------------------------
     This component is the login page. Users
     are directed here if they are not authenticated.
 -----------------------------------------------------*/
 
-export default function Login() {
+const Login = ({ login, isAuthenticated }) => {
 
     const [formData, setFormData] = useState({
         email: '',
@@ -28,8 +31,12 @@ export default function Login() {
     // OnSubmit of form -> Validate password fields and initiate action
     const onSubmit = e => {
         e.preventDefault();
-        
-        console.log("Success");
+        login(email, password);
+    }
+
+    // If the user is authenticated already -> Redirect
+    if(isAuthenticated){
+        return <Redirect to="/"></Redirect>
     }
 
     return (
@@ -67,3 +74,14 @@ export default function Login() {
         </Container>
     )
 }
+
+Login.propTypes = {
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login);
