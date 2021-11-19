@@ -2,7 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React, { Component } from 'react';
 import Home from './components/Home.js';
-import Stats from './components/Stats'
+import Stats from './components/Stats';
+import Login from './components/Login';
 import AppNavbar from './components/AppNavbar';
 import { Provider } from 'react-redux';
 import store from "./store";
@@ -34,6 +35,7 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/stats" exact component={Stats} />
+                <Route path="/login" exact component={Login} />
               </Switch>
             </div>
           </Provider>
