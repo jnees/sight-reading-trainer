@@ -1,16 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import Home from './components/Home.js';
 import Stats from './components/Stats';
 import Login from './components/Login';
+import Register from './components/Register';
 import AppNavbar from './components/AppNavbar';
 import { Provider } from 'react-redux';
 import store from "./store";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 /*----------------------------------------------------
@@ -22,26 +24,41 @@ import {
 
   Provider => Allows components to be rendered within
           the context of the Redux state store.
+
+  If the user is not authenticated, they will land on
+  the login page.
 -----------------------------------------------------*/
 
-class App extends Component {
+const isAuthenticated = false;
+
+const App = () => {
   
-  render() {
     return (
       <Router>
           <Provider store={store}>
-            <div className="App">
-              <AppNavbar />
-              <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/stats" exact component={Stats} />
-                <Route path="/login" exact component={Login} />
-              </Switch>
-            </div>
+            {isAuthenticated? <AppNavbar />: null}
+              
+            <Switch>
+              <Route exact path="/">
+                {isAuthenticated ? <Home />: <Redirect to="/login" /> }
+              </Route>
+
+              <Route exact path="/stats">
+                {isAuthenticated ? <Stats />: <Redirect to="/login" />}
+              </Route>
+
+              <Route exact path="/login">
+                {isAuthenticated ? <Redirect to="/" />: <Login />}
+              </Route>
+
+              <Route exact path="/register">
+                {isAuthenticated ? <Redirect to="/" />: <Register />}
+              </Route>
+            </Switch>
+
           </Provider>
       </Router>
     );
-  }
 }
 
 export default App;

@@ -23,7 +23,8 @@ import { Link } from 'react-router-dom';
  ------------------------------------------------*/
 export default class AppNavbar extends Component {
     state = {
-        isOpen: false
+        isOpen: false,
+        isAuthenticated: false
     }
 
     toggle = () => {

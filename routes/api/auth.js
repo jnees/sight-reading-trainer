@@ -24,7 +24,9 @@ router.get('/', auth, async (req, res) => {
 
 
 // @route   Post api/auth
-// @desc    Login an existing user.
+// @desc    Login an existing User using an email/password combo.
+//          Successful logins return a json web token which
+//          can be decoded to get the user's id number.
 // @access  Public
 router.post('/',
     // Validate input from form with express-validator package.
