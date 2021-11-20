@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   Collapse,
   Container,
@@ -21,47 +21,49 @@ import { Link } from 'react-router-dom';
     screens by converting to pop-out list
     with pancake toggle button.
  ------------------------------------------------*/
-export default class AppNavbar extends Component {
-    state = {
+const AppNavbar = () => {
+
+    const [navState, setNavState] = useState({
         isOpen: false,
         isAuthenticated: false
-    }
+    });
 
-    toggle = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
+    const toggle = () => {
+        setNavState({
+            ...navState,
+            isOpen: !navState.isOpen
         });
     }
 
-    render() {
-        return (
-            <div>
-                <Navbar color="dark" dark expand="sm" className="mb-5">
-                    <Container>
-                        <NavbarBrand href="/">User</NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} />
-                        <Collapse isOpen={this.state.isOpen} navbar>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <Link class="nav-link" to="/">
-                                        <NavLink >Home</NavLink>
-                                    </Link>
-                                </NavItem>
-                                <NavItem>
-                                    <Link class="nav-link" to="/stats">
-                                        <NavLink href="/stats">Stats</NavLink>
-                                    </Link>
-                                </NavItem>
-                                <NavItem>
-                                    <Link class="nav-link" to="/logout">
-                                        <NavLink href="/logout">Log Out</NavLink>
-                                    </Link>
-                                </NavItem>
-                            </Nav>
-                        </Collapse>
-                    </Container>
-                </Navbar>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <Navbar color="dark" dark expand="sm" className="mb-5">
+                <Container>
+                    <NavbarBrand href="/">User</NavbarBrand>
+                    <NavbarToggler onClick={toggle} />
+                    <Collapse isOpen={navState.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <Link class="nav-link" to="/">
+                                    <NavLink >Home</NavLink>
+                                </Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link class="nav-link" to="/stats">
+                                    <NavLink href="/stats">Stats</NavLink>
+                                </Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link class="nav-link" to="/logout">
+                                    <NavLink href="/logout">Log Out</NavLink>
+                                </Link>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Container>
+            </Navbar>
+        </div>
+    );
 }
+
+export default AppNavbar;
