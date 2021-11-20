@@ -52,7 +52,7 @@ const Register = ({register, isAuthenticated}) => {
                 <Form onSubmit={e => onSubmit(e)}>
                     <FormGroup>
                         <Label for="name">
-                        Username
+                        Username (how your name will appear on the site)
                         </Label>
                         <Input 
                             id="Name" 

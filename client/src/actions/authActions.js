@@ -5,7 +5,8 @@ import {
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_FAIL,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    LOGOUT
 } from './types';
 import setAuthToken from '../utils/setAuthToken'
 
@@ -114,3 +115,14 @@ export const login = (email, password) => async dispatch => {
         })
     }
 }
+
+/*----------------------------------------------------
+    Logout User -> Reducer will remove token and
+    update store.
+------------------------------------------------------*/
+export const logout  = () => dispatch => {
+    // Send update to the store
+    dispatch({
+        type: LOGOUT
+    });
+} 
