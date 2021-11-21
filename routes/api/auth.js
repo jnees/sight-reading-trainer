@@ -13,6 +13,7 @@ const bcrypt = require("bcryptjs");
 // @access  Authorized Users -> Users with no token will be sent
 //          error status by the auth middleware.
 router.get('/', auth, async (req, res) => {
+    console.log("GET /api/auth");
     try {
         const user = await User.findById(req.user.id).select("-password")
         res.json(user);

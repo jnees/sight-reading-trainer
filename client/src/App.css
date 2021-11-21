@@ -52,8 +52,9 @@
     background-color: black;
     border-radius: 12%;
     position: absolute;
+    box-shadow: 3px 0px 10px -3px rgba(0,0,0,0.85);
 
-
+    /* White highlight */
     background: rgba(0,0,0,1);
     background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(56,56,56,1) 22%, rgba(54,54,54,1) 25%, rgba(46,46,46,1) 28%, rgba(28,28,28,1) 36%, rgba(0,0,0,1) 51%, rgba(10,10,10,1) 78%, rgba(18,18,18,1) 91%, rgba(10,10,10,1) 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(22%, rgba(56,56,56,1)), color-stop(25%, rgba(54,54,54,1)), color-stop(28%, rgba(46,46,46,1)), color-stop(36%, rgba(28,28,28,1)), color-stop(51%, rgba(0,0,0,1)), color-stop(78%, rgba(10,10,10,1)), color-stop(91%, rgba(18,18,18,1)), color-stop(100%, rgba(10,10,10,1)));

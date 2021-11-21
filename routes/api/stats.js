@@ -6,6 +6,7 @@ const axios = require("axios");
 // @desc Get all Attempts for given user from microservice
 // @access Public
 router.get("/:id", (req, res) => {
+    console.log(`GET /${req.params.id}`)
     axios
         .post(
             "https://music-stats-microservice.herokuapp.com",

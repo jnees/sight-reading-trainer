@@ -8,7 +8,8 @@ import {
     LOGIN_SUCCESS,
     LOGOUT
 } from './types';
-import setAuthToken from '../utils/setAuthToken'
+import setAuthToken from '../utils/setAuthToken';
+import { updateStats } from './noteActions';
 
 
 /*----------------------------------------------------
@@ -33,6 +34,8 @@ export const loadUser = () => async dispatch => {
             type: USER_LOADED,
             payload: res.data
         });
+
+        updateStats(res.data._id);
     } catch(error){
         dispatch({
             type: AUTH_ERROR

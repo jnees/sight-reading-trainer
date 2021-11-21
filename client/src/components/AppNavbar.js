@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Collapse,
@@ -13,7 +13,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { logout} from '../actions/authActions';
+import { logout, loadUser } from '../actions/authActions';
 
 
 /*-----------------------------------------------
@@ -24,12 +24,14 @@ import { logout} from '../actions/authActions';
     screens by converting to pop-out list
     with pancake toggle button.
  ------------------------------------------------*/
-const AppNavbar = ({ auth: { isAuthenticated, loading, user}, logout }) => {
+const AppNavbar = ({ 
+        auth: { isAuthenticated, loading},
+        name,
+        logout }) => {
 
-    const [navState, setNavState] = useState({
-        isOpen: false,
-        isAuthenticated: false,
-        name: user? user.name: "Sight Reading Trainer"
+        const [navState, setNavState] = useState({
+            isOpen: false,
+            isAuthenticated: false
     });
 
     // Handle toggling of the navbar sandwhich button
@@ -79,7 +81,7 @@ const AppNavbar = ({ auth: { isAuthenticated, loading, user}, logout }) => {
         <div>
             <Navbar color="dark" dark expand="sm" className="mb-5">
                 <Container>
-                    <NavbarBrand href="/">{navState.name}</NavbarBrand>
+                    <NavbarBrand href="#!">{name}</NavbarBrand>
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={navState.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
@@ -108,11 +110,14 @@ const AppNavbar = ({ auth: { isAuthenticated, loading, user}, logout }) => {
 
 AppNavbar.propTypes = {
     logout: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    loadUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    name: PropTypes.string
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    name: state.auth.user.name
 });
 
-export default connect(mapStateToProps, {logout})(AppNavbar);
+export default connect(mapStateToProps, {logout, loadUser })(AppNavbar);

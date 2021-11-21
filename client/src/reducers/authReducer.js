@@ -16,7 +16,7 @@ const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     loading: true,
-    user: null
+    user: {name: "Sight Reading Trainer"}
 }
 
 const authReducer = (state = initialState, action) => {

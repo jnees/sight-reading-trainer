@@ -30,7 +30,7 @@ class Key extends Component {
  
         // Attempt payload
         const attempt = {
-          userID: this.props.notes.userID,
+          userID: this.props.auth.user._id,
           keySig: this.props.notes.keySig,
           note: this.props.notes.notes,
           correct: correct
@@ -55,7 +55,7 @@ class Key extends Component {
         // TODO: Color handling and making sure only this note renders.
 
         // Update Stats
-        this.props.updateStats(this.props.notes.userID);
+        this.props.updateStats(this.props.auth.user._id);
 
     }
 
@@ -84,7 +84,8 @@ Key.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  notes: state.notes
+  notes: state.notes,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getStatus, sendAttempt, getNextNote, updateStats })(Key);

@@ -4,6 +4,7 @@ import {Container, Button, Form} from "reactstrap";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import { updateStats } from '../actions/noteActions';
 
 
 /*-----------------------------------------------------------
@@ -11,10 +12,12 @@ import { Redirect } from 'react-router';
   of the stats page. The information contained in the
   stats table is part of the StatsTable component.
  ------------------------------------------------------------*/
-const Stats = ({isAuthenticated}) => {
+const Stats = ({auth}) => {
 
-  if(!isAuthenticated){
+  if(!auth.isAuthenticated){
     return <Redirect to="/login"></Redirect>
+  } else {
+    updateStats(auth.user._id);
   }
 
   return (
@@ -47,7 +50,7 @@ Stats.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  auth: state.auth
 });
 
 export default connect(mapStateToProps,{})(Stats);

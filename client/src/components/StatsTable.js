@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { updateStats } from '../actions/noteActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,19 +13,16 @@ import PropTypes from 'prop-types';
   Updates to the data itself are made through the 
   UpdateStats() function in NoteReducer.js.
  ------------------------------------------------------------*/
-class StatsTable extends Component {
+const StatsTable = ({notes, auth}) => {
 
-    componentDidMount(){
-        this.props.updateStats(this.props.notes.userID);
-    }
+    
 
-    render() {
-      return (
+    return (
         <table class="table">
             
             <thead>
                 <tr>
-                    <th scope="col">UserID: {this.props.notes.userID}</th>
+                    <th scope="col">User: {auth.user.name}</th>
                 </tr>
                 <tr>
                     <th scope="col">Time Period</th>
@@ -37,43 +34,43 @@ class StatsTable extends Component {
                 
                 <tr>
                     <th scope="row">Today</th>
-                    <td>{this.props.notes.stats.data.attempted1}</td>
-                    <td>{parseFloat(this.props.notes.stats.data.accuracy1).toFixed(2)}</td>
+                    <td>{notes.stats.data.attempted1}</td>
+                    <td>{parseFloat(notes.stats.data.accuracy1).toFixed(2)}</td>
                 </tr>
                 <tr>
                     <th scope="row">Last 7 Days</th>
-                    <td>{this.props.notes.stats.data.attempted7}</td>
-                    <td>{parseFloat(this.props.notes.stats.data.accuracy7).toFixed(2)}</td>
+                    <td>{notes.stats.data.attempted7}</td>
+                    <td>{parseFloat(notes.stats.data.accuracy7).toFixed(2)}</td>
                 </tr>
                 <tr>
                     <th scope="row">Last 30 Days</th>
-                    <td>{this.props.notes.stats.data.attempted30}</td>
-                    <td>{parseFloat(this.props.notes.stats.data.accuracy30).toFixed(2)}</td>
+                    <td>{notes.stats.data.attempted30}</td>
+                    <td>{parseFloat(notes.stats.data.accuracy30).toFixed(2)}</td>
                 </tr>
                 <tr>
                     <th scope="row">All Time</th>
-                    <td>{this.props.notes.stats.data.totalAttempts}</td>
-                    <td>{parseFloat(this.props.notes.stats.data.totalAccuracy).toFixed(2)}</td>
+                    <td>{notes.stats.data.totalAttempts}</td>
+                    <td>{parseFloat(notes.stats.data.totalAccuracy).toFixed(2)}</td>
                 </tr>
             </tbody>
         </table>
-      );
-    }
-  }
+    );
+}
 
   // Prop validation
 StatsTable.propTypes = {
     updateStats: PropTypes.func.isRequired,
-    notes: PropTypes.object.isRequired
+    notes: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state){
     return {
-        notes: state.notes
+        notes: state.notes,
+        auth: state.auth
     }
 }
 
-  
 export default connect(mapStateToProps, { updateStats })(StatsTable);
   
   
