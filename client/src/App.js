@@ -30,7 +30,6 @@ import setAuthToken from './utils/setAuthToken'
   the login page.
 -----------------------------------------------------*/
 
-
 if(localStorage.token){
   setAuthToken(localStorage.token);
 }
