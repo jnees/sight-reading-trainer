@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { GET_NOTES, SEND_ATTEMPT, GET_STATUS, GET_NEXT_NOTE, UPDATE_STATS} from "./types";
+import { GET_NOTES, SEND_ATTEMPT, GET_STATUS, GET_NEXT_NOTE, UPDATE_STATS, DELETE_STATS} from "./types";
+import setAuthToken from '../utils/setAuthToken';
 
 export const getNotes = () => {
     return {
@@ -23,7 +24,7 @@ export const getStatus = () => {
     return {
         type: GET_STATUS
     }
-}
+};
 
 export const getNextNote = (newNote, n_seconds) =>  dispatch => {
 
@@ -33,8 +34,8 @@ export const getNextNote = (newNote, n_seconds) =>  dispatch => {
             newNote: newNote
         })
         
-    }, n_seconds * 1000)
-}
+    }, n_seconds * 800)
+};
 
 export const updateStats = (userID) => dispatch => {
     axios
@@ -49,6 +50,27 @@ export const updateStats = (userID) => dispatch => {
         )
         .catch(err => {
             console.log("Error updating stats")
+            console.log(err);
+        })
+};
+
+export const deleteStats = (userID) => dispatch => {
+
+    // Set global header if token (required by API for delete)
+    if(localStorage.token){
+        setAuthToken(localStorage.token);
+    }
+    
+    axios
+        .delete(`api/stats/${userID}`,)
+        .then(res => {
+            console.log(res);
+            dispatch({
+                type: DELETE_STATS
+            })
+        })
+        .catch(err => {
+            console.log("Error deleting stats")
             console.log(err);
         })
 };

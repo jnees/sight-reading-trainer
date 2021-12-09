@@ -1,4 +1,11 @@
-import { GET_NOTES, GET_STATUS, SEND_ATTEMPT, GET_NEXT_NOTE, UPDATE_STATS } from "../actions/types"
+import { 
+        GET_NOTES, 
+        GET_STATUS, 
+        SEND_ATTEMPT, 
+        GET_NEXT_NOTE, 
+        UPDATE_STATS, 
+        DELETE_STATS 
+        } from "../actions/types"
 import { randomNote } from "../noteGenerator"
 
 const initialState = {
@@ -55,6 +62,12 @@ const noteReducer = (state = initialState, action) => {
             return {
                 ...state,
                 stats: action.stats
+            }
+
+        case DELETE_STATS:
+            return {
+                ...state,
+                stats: initialState.stats
             }
 
         default:
