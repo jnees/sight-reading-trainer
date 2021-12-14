@@ -4,6 +4,7 @@ const attempts = require("./routes/api/attempts");
 const stats = require("./routes/api/stats");
 const auth = require("./routes/api/auth");
 const users = require("./routes/api/users");
+require("dotenv").config();
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 // DB Configuration
-const db = require("./config/keys.js").mongoURI;
+const db = process.env.MONGO_URI;
 mongoose.connect(db, { useNewUrlParser: true})
     .then(() => console.log("Connected to database..."))
     .catch(err => console.log(err));
