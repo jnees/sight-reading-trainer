@@ -5,7 +5,6 @@ const stats = require("./routes/api/stats");
 const auth = require("./routes/api/auth");
 const users = require("./routes/api/users");
 const path = require("path");
-const production_env = process.env.NODE_ENV;
 require("dotenv").config();
 
 const app = express();
@@ -20,22 +19,19 @@ mongoose.connect(db, { useNewUrlParser: true})
     .then(() => console.log("Connected to database..."))
     .catch(err => console.log(err));
 
-// Serve static if in production
-if(production_env){
-    if(production_env.trim() === "production"){
-        app.use(express.static('client/build'));
-
-        app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-        });
-    }
-}
-
-// Routes
+    // Routes
 app.use("/api/attempts", attempts);
 app.use("/api/stats", stats);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+
+// Serve static if in production
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static('client/build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+    });
+}
 
 // Listener
 const PORT = process.env.port || 3000;
