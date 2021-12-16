@@ -19,7 +19,7 @@ router.get("/:id", (req, res) => {
         .catch((err) => {
             console.log(err);
             return res 
-                .status(503)
+                .status(501)
                 .json({status: "Failed to get user stats."})
         })
 })
